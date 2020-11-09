@@ -1,0 +1,29 @@
+.todo-list-item {
+    padding: 2px 4px;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    box-sizing: border-box;
+
+    @media screen and (min-width: 600px) {
+        flex-flow: row nowrap;
+        justify-content: space-between;
+    }
+}
+
+.todo-list-item__label {
+    font-size: 1.25rem;
+    margin: 0 1.25rem;
+    line-height: 35px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.todo-list-item.done .todo-list-item__label {
+    text-decoration: line-through;
+}
+
+.todo-list-item.important .todo-list-item__label {
+    font-weight: bold;
+    color: #3f51b5;
+}

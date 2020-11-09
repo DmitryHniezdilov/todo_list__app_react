@@ -5,8 +5,10 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import NotificationImportantIcon from '@material-ui/icons/NotificationImportant';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import FormControl from '@material-ui/core/FormControl';
 
-import './todo-list-item.css';
+import './todo-list-item.scss';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -18,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
         height: 28,
         margin: 4,
     },
+    formControl: {
+        flexDirection: "row",
+    }
 
 }));
 
@@ -42,19 +47,25 @@ const TodoListItem = ({ label,
     return (
         <Paper className={classNames}>
             <span
-                className="todo-list-item-label"
+                className="todo-list-item__label"
                 onClick={onToggleDone}>
                 {label}
             </span>
-            <IconButton type="button" color="secondary" className={classes.iconButton} aria-label="delete"
-                onClick={onDeleted}>
-                <DeleteIcon />
-            </IconButton>
-            <Divider className={classes.divider} orientation="vertical" />
-            <IconButton type="button" color="primary" className={classes.iconButton} aria-label="important"
-                onClick={onToggleImportant}>
-                <NotificationImportantIcon />
-            </IconButton>
+            <FormControl className={classes.formControl}>
+                <IconButton type="button" color="secondary" className={classes.iconButton} aria-label="delete"
+                    onClick={onDeleted}>
+                    <DeleteIcon />
+                </IconButton>
+                <Divider className={classes.divider} orientation="vertical" />
+                <IconButton type="button" color="primary" className={classes.iconButton} aria-label="important"
+                    onClick={onToggleImportant}>
+                    <NotificationImportantIcon />
+                </IconButton>
+                <Divider className={classes.divider} orientation="vertical" />
+                <IconButton type="button" color="action.active" className={classes.iconButton} aria-label="important">
+                    <EditIcon />
+                </IconButton>
+            </FormControl>
         </Paper>
     );
 };
