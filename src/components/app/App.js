@@ -32,12 +32,12 @@ class App extends Component {
 
   state = {
     todoData: [
-      this.createTodoItem('Drink Coffee'),
-      this.createTodoItem('Learn Redux'),
       this.createTodoItem('Make Awesome App')
     ],
     term: '',
-    filter: 'all'
+    filter: 'all',
+    isEditable: false,
+    editableId: null
   };
 
   createTodoItem(label) {
@@ -45,11 +45,40 @@ class App extends Component {
       label,
       important: false,
       done: false,
-      id: this.startId++
+      id: new Date().valueOf()
     }
   }
 
-  deleteItem = (id) => {
+  onEditableSave = value => {
+    this.setState(({ todoData, isEditable, editableId }) => {
+      const idx = todoData.findIndex((el) => el.id === this.state.editableId);
+      const changeItemLabel = todoData[idx];
+      changeItemLabel.label = value;
+      const newArray = [
+        ...todoData.slice(0, idx),
+        changeItemLabel,
+        ...todoData.slice(idx + 1)
+      ];
+
+      return {
+        todoData: newArray,
+        isEditable: false,
+        editableId: null
+      };
+    })
+  }
+
+  editeItem = id => {
+    let { todoData } = this.state;
+    const idx = todoData.findIndex((el) => el.id === id);
+
+    this.setState({
+      isEditable: true,
+      editableId: todoData[idx].id
+    });
+  }
+
+  deleteItem = id => {
     this.setState(({ todoData }) => {
       const idx = todoData.findIndex((el) => el.id === id);
 
@@ -64,7 +93,7 @@ class App extends Component {
     })
   }
 
-  addItem = (text) => {
+  addItem = text => {
     const newItem = this.createTodoItem(text);
 
     this.setState(({ todoData }) => {
@@ -168,7 +197,7 @@ class App extends Component {
 
     const { classes } = this.props;
 
-    const { todoData, term, filter } = this.state;
+    const { todoData, term, filter, isEditable, editableId } = this.state;
 
     const visibleItems = this.filter(
       this.search(todoData, term), filter);
@@ -177,6 +206,13 @@ class App extends Component {
       .filter((el) => el.done).length;
 
     const todoCount = todoData.length - doneCount;
+
+    let editableValue = '';
+
+    if (editableId && isEditable) {
+      const item = todoData.find((el) => el.id === editableId);
+      editableValue = item.label;
+    }
 
     return (
       <Grid container justify="center" alignItems="center" className={classes.root}>
@@ -197,9 +233,14 @@ class App extends Component {
                 todos={visibleItems}
                 onDeleted={this.deleteItem}
                 onToggleImportant={this.onToggleImportant}
-                onToggleDone={this.onToggleDone} />
+                onToggleDone={this.onToggleDone}
+                editeItem={this.editeItem}
+                isEditable={this.state.isEditable}/>
               <ItemAddForm
-                onItemAdded={this.addItem} />
+                onItemAdded={this.addItem}
+                onEditableSave={this.onEditableSave}
+                isEditable={this.state.isEditable}
+                editableValue={editableValue} />
             </CardContent>
           </Card>
         </Grid>

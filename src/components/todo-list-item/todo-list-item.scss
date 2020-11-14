@@ -9,21 +9,27 @@
         flex-flow: row nowrap;
         justify-content: space-between;
     }
-}
 
-.todo-list-item__label {
-    font-size: 1.25rem;
-    margin: 0 1.25rem;
-    line-height: 35px;
-    cursor: pointer;
-    user-select: none;
-}
+    &__label {
+        font-size: 1.25rem;
+        margin: 0 1.25rem;
+        line-height: 35px;
+        cursor: pointer;
+        user-select: none;
+        overflow: hidden;
+        flex: 1;
+    }
 
-.todo-list-item.done .todo-list-item__label {
-    text-decoration: line-through;
-}
+    &.done .todo-list-item__label {
+        text-decoration: line-through;
+    }
 
-.todo-list-item.important .todo-list-item__label {
-    font-weight: bold;
-    color: #3f51b5;
+    &.important .todo-list-item__label {
+        font-weight: bold;
+        color: #3f51b5;
+    }
+
+    &.editable .todo-list-item__label {
+        cursor: auto;
+    }
 }

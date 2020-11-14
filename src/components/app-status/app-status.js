@@ -4,7 +4,7 @@ import './app-status.scss';
 
 const AppStatus = ({ toDo, done }) => {
   return (
-      <Typography item xs={3} md={2} variant="h6" component="h2" color="textSecondary">
+      <Typography xs={3} md={2} variant="h6" component="h2" color="textSecondary">
         {toDo} more to do, {done} done
         </Typography>
   )

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
@@ -31,7 +31,9 @@ const TodoListItem = ({ label,
     onToggleImportant,
     onToggleDone,
     important,
-    done }) => {
+    done,
+    editeItem,
+    isEditable }) => {
 
     const classes = useStyles();
 
@@ -44,25 +46,32 @@ const TodoListItem = ({ label,
         classNames += ' important'
     }
 
+    if (isEditable) {
+        classNames += ' editable'
+    }
+
+    const notToggleDone = e => e.preventDefault();
+
     return (
         <Paper className={classNames}>
             <span
                 className="todo-list-item__label"
-                onClick={onToggleDone}>
+                onClick={isEditable ? notToggleDone : onToggleDone}>
                 {label}
             </span>
             <FormControl className={classes.formControl}>
-                <IconButton type="button" color="secondary" className={classes.iconButton} aria-label="delete"
+                <IconButton disabled={isEditable} type="button" color="secondary" className={classes.iconButton} aria-label="delete"
                     onClick={onDeleted}>
                     <DeleteIcon />
                 </IconButton>
                 <Divider className={classes.divider} orientation="vertical" />
-                <IconButton type="button" color="primary" className={classes.iconButton} aria-label="important"
+                <IconButton disabled={isEditable} type="button" color="primary" className={classes.iconButton} aria-label="important"
                     onClick={onToggleImportant}>
                     <NotificationImportantIcon />
                 </IconButton>
                 <Divider className={classes.divider} orientation="vertical" />
-                <IconButton type="button" color="action.active" className={classes.iconButton} aria-label="important">
+                <IconButton disabled={isEditable} type="button" className={classes.iconButton} aria-label="edit"
+                    onClick={editeItem}>
                     <EditIcon />
                 </IconButton>
             </FormControl>
