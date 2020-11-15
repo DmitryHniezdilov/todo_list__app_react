@@ -52,6 +52,13 @@ class ItemAddForm extends Component {
         });
     };
 
+    onEditableHandler = e => {
+        e.preventDefault();
+        const { onEditableSave } = this.props;
+        const { label } = this.state;
+        onEditableSave(label);
+    }
+
     componentDidUpdate(prevProps) {
         if (this.props.isEditable !== prevProps.isEditable) {
             this.props.isEditable ? this.setState({ label: this.props.editableValue }) : this.setState({ label: '' });
@@ -59,12 +66,16 @@ class ItemAddForm extends Component {
     };
 
     render() {
-        const { classes, isEditable, onEditableSave, editableValue } = this.props;
+        const { classes, isEditable } = this.props;
         const { label, isError } = this.state;
+
+        const isSubmitable = label.length >= this.minInputLength;
+
+        const changeSubmit = isEditable ? this.onEditableHandler : this.onSubmit;
 
         return (
             <Paper component="form" className="item-add-form__wrap"
-                onSubmit={label.length >= this.minInputLength ? (isEditable ? () => onEditableSave(label) : this.onSubmit) : this.nonSubmit}>
+                onSubmit={isSubmitable ? changeSubmit : this.nonSubmit}>
                 <FormControl className={classes.formControl}>
                     <Input
                         error={isError}
@@ -83,21 +94,12 @@ class ItemAddForm extends Component {
                         </Formhelpertext>
                     )}
                 </FormControl>
-                {isEditable ? (
-                    <Button className='item-add-form'
-                        startIcon={<SaveIcon />}
-                        onClick={() => onEditableSave(label)}
+                <Button className='item-add-form'
+                        startIcon={isEditable ? <SaveIcon/> : <QueueIcon/>}
+                        onClick={isEditable ? this.onEditableHandler : this.onSubmit}
                         disabled={label.length < this.minInputLength}>
-                        Save
-                    </Button>
-                ) : (
-                        <Button className='item-add-form'
-                            startIcon={<QueueIcon />}
-                            onClick={this.onSubmit}
-                            disabled={label.length < this.minInputLength}>
-                            Add Item
-                        </Button>
-                    )}
+                        {isEditable ? 'Save' : 'Add Item'}
+                </Button>
             </Paper>
         );
     }
