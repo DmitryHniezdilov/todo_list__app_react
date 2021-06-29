@@ -1,10 +1,6 @@
-import React, { Component } from 'react';
-
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-
+import React, {Component} from 'react';
+import {withStyles} from '@material-ui/core/styles';
+import {Grid, Card, CardContent} from '@material-ui/core';
 import AppTitle from '../app-title/';
 import AppStatus from '../app-status/';
 import SearchPanel from '../search-panel/';
@@ -50,7 +46,7 @@ class App extends Component {
   }
 
   onEditableSave = value => {
-    this.setState(({ todoData, isEditable, editableId }) => {
+    this.setState(({todoData, isEditable, editableId}) => {
       const idx = todoData.findIndex((el) => el.id === this.state.editableId);
       const changeItemLabel = todoData[idx];
       changeItemLabel.label = value;
@@ -69,7 +65,7 @@ class App extends Component {
   }
 
   editeItem = id => {
-    let { todoData } = this.state;
+    let {todoData} = this.state;
     const idx = todoData.findIndex((el) => el.id === id);
 
     this.setState({
@@ -79,7 +75,7 @@ class App extends Component {
   }
 
   deleteItem = id => {
-    this.setState(({ todoData }) => {
+    this.setState(({todoData}) => {
       const idx = todoData.findIndex((el) => el.id === id);
 
       const newArray = [
@@ -96,7 +92,7 @@ class App extends Component {
   addItem = text => {
     const newItem = this.createTodoItem(text);
 
-    this.setState(({ todoData }) => {
+    this.setState(({todoData}) => {
       const newArr = [
         ...todoData,
         newItem
@@ -125,7 +121,7 @@ class App extends Component {
   }
 
   onToggleDone = (id) => {
-    this.setState(({ todoData }) => {
+    this.setState(({todoData}) => {
       return {
         todoData: this.toggleProperty(todoData, id, 'done')
       };
@@ -133,7 +129,7 @@ class App extends Component {
   };
 
   onToggleImportant = (id) => {
-    this.setState(({ todoData }) => {
+    this.setState(({todoData}) => {
       return {
         todoData: this.toggleProperty(todoData, id, 'important')
       };
@@ -141,7 +137,7 @@ class App extends Component {
   };
 
   onSearchChange = (term) => {
-    this.setState({ term });
+    this.setState({term});
   };
 
   search(items, term) {
@@ -168,11 +164,11 @@ class App extends Component {
   }
 
   onFilterChange = (filter) => {
-    this.setState({ filter });
+    this.setState({filter});
   }
 
   toLocalStorage = () => {
-    let { todoData } = this.state;
+    let {todoData} = this.state;
     localStorage.setItem('todoData', JSON.stringify(todoData));
   };
 
@@ -185,19 +181,20 @@ class App extends Component {
   componentDidMount() {
     const ArrayFromLocalStorage = JSON.parse(localStorage.getItem("todoData"));
     if (null !== ArrayFromLocalStorage) {
-      this.setState(({ todoData }) => {
+      this.setState(({todoData}) => {
         return {
           todoData: ArrayFromLocalStorage
         };
       });
-    };
+    }
+    ;
   }
 
   render() {
 
-    const { classes } = this.props;
+    const {classes} = this.props;
 
-    const { todoData, term, filter, isEditable, editableId } = this.state;
+    const {todoData, term, filter, isEditable, editableId} = this.state;
 
     const visibleItems = this.filter(
       this.search(todoData, term), filter);
@@ -219,14 +216,14 @@ class App extends Component {
         <Grid item xs={8} component="main" className={classes.item}>
           <Card className={classes.card} variant="outlined">
             <CardContent className="app__top-wrap">
-              <AppTitle />
+              <AppTitle/>
               <AppStatus
-                toDo={todoCount} done={doneCount} />
+                toDo={todoCount} done={doneCount}/>
               <SearchPanel
-                onSearchChange={this.onSearchChange} />
+                onSearchChange={this.onSearchChange}/>
               <ItemStatusFilter
                 filter={filter}
-                onFilterChange={this.onFilterChange} />
+                onFilterChange={this.onFilterChange}/>
             </CardContent>
             <CardContent className="">
               <TodoList
@@ -240,7 +237,7 @@ class App extends Component {
                 onItemAdded={this.addItem}
                 onEditableSave={this.onEditableSave}
                 isEditable={this.state.isEditable}
-                editableValue={editableValue} />
+                editableValue={editableValue}/>
             </CardContent>
           </Card>
         </Grid>
