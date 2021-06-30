@@ -220,7 +220,7 @@ class App extends Component {
               <AppStatus
                 toDo={todoCount} done={doneCount}/>
               <SearchPanel
-                onSearchChange={this.onSearchChange}/>
+                onSearchChangeFunc={this.onSearchChange}/>
               <ItemStatusFilter
                 filter={filter}
                 onFilterChange={this.onFilterChange}/>

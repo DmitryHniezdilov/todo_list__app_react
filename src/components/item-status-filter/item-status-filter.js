@@ -1,39 +1,37 @@
 import React, {Component} from 'react';
 import {Button, ButtonGroup} from '@material-ui/core';
-import './item-status-filter.css';
+import {useStyles} from './styles';
 
-export default class ItemStatusFilter extends Component {
+const buttonsList = [
+  {name: 'all', label: 'All'},
+  {name: 'active', label: 'Active'},
+  {name: 'done', label: 'Done'}
+];
 
-  buttons = [
-    {name: 'all', label: 'All'},
-    {name: 'active', label: 'Active'},
-    {name: 'done', label: 'Done'}
-  ];
+const ItemStatusFilter = ({filter, onFilterChange}) => {
+  const classes = useStyles();
 
-  render() {
-
-    const {filter, onFilterChange} = this.props;
-
-    const buttons = this.buttons.map(({name, label}) => {
-      const isActive = filter === name;
-      const variantActive = isActive ? 'contained' : '';
-      const colorActive = isActive ? 'primary' : '';
-
-      return (
-        <Button
-          key={name}
-          onClick={() => onFilterChange(name)}
-          variant={variantActive}
-          color={colorActive}>
-          {label}
-        </Button>
-      );
-    });
+  const buttons = buttonsList.map(({name, label}) => {
+    const isActive = filter === name;
+    const variantActive = isActive ? 'contained' : '';
+    const colorActive = isActive ? 'primary' : '';
 
     return (
-      <ButtonGroup variant='outlined' aria-label="button group" className='item-status-filter'>
-        {buttons}
-      </ButtonGroup>
+      <Button
+        key={name}
+        onClick={() => onFilterChange(name)}
+        variant={variantActive}
+        color={colorActive}>
+        {label}
+      </Button>
     );
-  };
+  });
+
+  return (
+    <ButtonGroup variant='outlined' aria-label="button group" className={classes.itemStatusFilter}>
+      {buttons}
+    </ButtonGroup>
+  );
 };
+
+export default ItemStatusFilter;

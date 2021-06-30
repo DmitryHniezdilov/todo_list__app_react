@@ -1,43 +1,27 @@
-import React, {Component} from 'react';
-import {withStyles} from '@material-ui/core/styles';
+import React, {useState} from 'react';
 import Input from '@material-ui/core/Input';
-import './search-panel.css';
+import {useStyles} from './styles';
 
-const useStyles = theme => ({
-  input: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    marginBottom: '1px',
-  },
-});
+const SearchPanel = ({onSearchChangeFunc}) => {
+  const classes = useStyles();
+  const [term, setTerm] = useState('');
 
-class SearchPanel extends Component {
-
-  state = {
-    term: ''
-  }
-
-  onSearchChange = (e) => {
+  const onSearchChange = (e) => {
     const term = e.target.value;
-    this.setState({term});
-    this.props.onSearchChange(term);
+    setTerm(term);
+    onSearchChangeFunc(term);
   };
 
-  render() {
-
-    const {classes} = this.props;
-
-    return (
-      <Input
-        variant="outlined"
-        className={classes.input}
-        placeholder="Type to search"
-        inputProps={{'aria-label': 'Type to search'}}
-        value={this.state.term}
-        onChange={this.onSearchChange}
-      />
-    );
-  };
+  return (
+    <Input
+      variant="outlined"
+      className={classes.input}
+      placeholder="Type to search"
+      inputProps={{'aria-label': 'Type to search'}}
+      value={term}
+      onChange={onSearchChange}
+    />
+  );
 };
 
-export default withStyles(useStyles)(SearchPanel);
+export default SearchPanel;

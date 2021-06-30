@@ -1,6 +1,6 @@
 import React from 'react';
 import TodoListItem from '../todo-list-item';
-import './todo-list.css';
+import {useStyles} from './styles';
 
 const TodoList = ({
                     todos,
@@ -11,11 +11,13 @@ const TodoList = ({
                     isEditable
                   }) => {
 
+  const classes = useStyles();
+
   const elements = todos.map((item) => {
     const {id, ...itemProps} = item;
 
     return (
-      <li key={id} className="list-group-item">
+      <li key={id} className={classes.listGroupItem}>
         <TodoListItem
           {...itemProps}
           onDeleted={() => onDeleted(id)}
@@ -29,7 +31,7 @@ const TodoList = ({
   });
 
   return (
-    <ul className="todo-list">
+    <ul className={classes.todoList}>
       {elements}
     </ul>
   );

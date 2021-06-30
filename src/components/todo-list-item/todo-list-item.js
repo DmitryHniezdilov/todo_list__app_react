@@ -1,26 +1,10 @@
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
 import {Paper, Divider, IconButton, FormControl} from '@material-ui/core';
 import NotificationImportantIcon from '@material-ui/icons/NotificationImportant';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import {useStyles} from './styles';
 import './todo-list-item.scss';
-
-const useStyles = makeStyles((theme) => ({
-
-  iconButton: {
-    padding: 10,
-  },
-
-  divider: {
-    height: 28,
-    margin: 4,
-  },
-  formControl: {
-    flexDirection: "row",
-  }
-
-}));
 
 const TodoListItem = ({
                         label,
