@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 
 const AppStatus = ({toDo, done}) => {
@@ -8,5 +9,10 @@ const AppStatus = ({toDo, done}) => {
     </Typography>
   )
 }
+
+AppStatus.propTypes = {
+  toDo: PropTypes.number,
+  done: PropTypes.number
+};
 
 export default AppStatus;

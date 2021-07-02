@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 import Input from '@material-ui/core/Input';
 import {useStyles} from './styles';
 
@@ -22,6 +23,10 @@ const SearchPanel = ({onSearchChangeFunc}) => {
       onChange={onSearchChange}
     />
   );
+};
+
+SearchPanel.propTypes = {
+  onSearchChangeFunc: PropTypes.func
 };
 
 export default SearchPanel;

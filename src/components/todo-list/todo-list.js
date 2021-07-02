@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TodoListItem from '../todo-list-item';
 import {useStyles} from './styles';
 
@@ -35,6 +36,15 @@ const TodoList = ({
       {elements}
     </ul>
   );
+};
+
+TodoList.propTypes = {
+  todos: PropTypes.array,
+  onDeleted: PropTypes.func,
+  onToggleImportant: PropTypes.func,
+  onToggleDone: PropTypes.func,
+  editeItem: PropTypes.func,
+  isEditable: PropTypes.func,
 };
 
 export default TodoList;

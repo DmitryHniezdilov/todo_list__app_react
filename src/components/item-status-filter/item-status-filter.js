@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {Button, ButtonGroup} from '@material-ui/core';
 import {useStyles} from './styles';
 
@@ -32,6 +33,11 @@ const ItemStatusFilter = ({filter, onFilterChange}) => {
       {buttons}
     </ButtonGroup>
   );
+};
+
+ItemStatusFilter.propTypes = {
+  filter: PropTypes.func,
+  onFilterChange: PropTypes.func,
 };
 
 export default ItemStatusFilter;
