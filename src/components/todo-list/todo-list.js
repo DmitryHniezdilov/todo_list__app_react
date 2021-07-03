@@ -44,7 +44,7 @@ TodoList.propTypes = {
   onToggleImportant: PropTypes.func,
   onToggleDone: PropTypes.func,
   editeItem: PropTypes.func,
-  isEditable: PropTypes.func,
+  isEditable: PropTypes.bool,
 };
 
 export default TodoList;

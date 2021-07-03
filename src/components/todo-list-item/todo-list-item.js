@@ -74,7 +74,7 @@ TodoListItem.propTypes = {
   important: PropTypes.bool,
   done: PropTypes.bool,
   editeItem: PropTypes.func,
-  isEditable: PropTypes.func,
+  isEditable: PropTypes.bool,
 };
 
 export default TodoListItem;

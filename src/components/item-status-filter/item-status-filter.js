@@ -36,7 +36,7 @@ const ItemStatusFilter = ({filter, onFilterChange}) => {
 };
 
 ItemStatusFilter.propTypes = {
-  filter: PropTypes.func,
+  filter: PropTypes.string,
   onFilterChange: PropTypes.func,
 };
 
