@@ -4,41 +4,41 @@ import {Button, ButtonGroup} from '@material-ui/core';
 import {useStyles} from './styles';
 
 const buttonsList = [
-  {name: 'all', label: 'All'},
-  {name: 'active', label: 'Active'},
-  {name: 'done', label: 'Done'}
+    {name: 'all', label: 'All'},
+    {name: 'active', label: 'Active'},
+    {name: 'done', label: 'Done'}
 ];
 
 const ItemStatusFilter = ({filter, onFilterChange}) => {
-  const classes = useStyles();
+    const classes = useStyles();
 
-  const buttons = buttonsList.map(({name, label}) => {
-    const isActive = filter === name;
-    const variantActive = isActive ? 'contained' : '';
-    const colorActive = isActive ? 'primary' : '';
-    const clickBtn = () => onFilterChange(name);
+    const buttons = buttonsList.map(({name, label}) => {
+        const isActive = filter === name;
+        const variantActive = isActive ? 'contained' : '';
+        const colorActive = isActive ? 'primary' : '';
+        const clickBtn = () => onFilterChange(name);
+
+        return (
+            <Button
+                key={name}
+                onClick={clickBtn}
+                variant={variantActive}
+                color={colorActive}>
+                {label}
+            </Button>
+        );
+    });
 
     return (
-      <Button
-        key={name}
-        onClick={clickBtn}
-        variant={variantActive}
-        color={colorActive}>
-        {label}
-      </Button>
+        <ButtonGroup variant='outlined' aria-label="button group" className={classes.itemStatusFilter}>
+            {buttons}
+        </ButtonGroup>
     );
-  });
-
-  return (
-    <ButtonGroup variant='outlined' aria-label="button group" className={classes.itemStatusFilter}>
-      {buttons}
-    </ButtonGroup>
-  );
 };
 
 ItemStatusFilter.propTypes = {
-  filter: PropTypes.string,
-  onFilterChange: PropTypes.func
+    filter: PropTypes.string,
+    onFilterChange: PropTypes.func
 };
 
 export default ItemStatusFilter;

@@ -4,27 +4,27 @@ import Input from '@material-ui/core/Input';
 import {useStyles} from './styles';
 
 const SearchPanel = ({onSearchChangeFunc}) => {
-  const classes = useStyles();
-  const [term, setTerm] = useState('');
+    const classes = useStyles();
+    const [term, setTerm] = useState('');
 
-  useEffect(() => {
-    onSearchChangeFunc(term)
-  }, [term, onSearchChangeFunc]);
+    useEffect(() => {
+        onSearchChangeFunc(term)
+    }, [term, onSearchChangeFunc]);
 
-  return (
-    <Input
-      variant="outlined"
-      className={classes.input}
-      placeholder="Type to search"
-      inputProps={{'aria-label': 'Type to search'}}
-      value={term}
-      onChange={useCallback(e => setTerm(e.target.value), [])}
-    />
-  );
+    return (
+        <Input
+            variant="outlined"
+            className={classes.input}
+            placeholder="Type to search"
+            inputProps={{'aria-label': 'Type to search'}}
+            value={term}
+            onChange={useCallback(e => setTerm(e.target.value), [])}
+        />
+    );
 };
 
 SearchPanel.propTypes = {
-  onSearchChangeFunc: PropTypes.func
+    onSearchChangeFunc: PropTypes.func
 };
 
 export default SearchPanel;
