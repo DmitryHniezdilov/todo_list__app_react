@@ -11,11 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-<<<<<<< HEAD
         node-version: [14]
-=======
-        node-version: '14'
->>>>>>> bc13246abb5962d31f1e6ae2212b80d492cdc5ca
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
