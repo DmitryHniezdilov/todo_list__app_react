@@ -23,7 +23,7 @@
     "build": "react-scripts build",
     "test": "npm run editorconfig",
     "eject": "react-scripts eject",
-    "editorconfig": "editorconfig"
+    "editorconfig": "editorconfig-checker"
   },
   "eslintConfig": {
     "extends": [
