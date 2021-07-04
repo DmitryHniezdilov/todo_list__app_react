@@ -11,15 +11,6 @@ import {useStyles} from './styles';
 const App = () => {
   const classes = useStyles();
 
-  const createTodoItem = label => {
-    return {
-      label,
-      important: false,
-      done: false,
-      id: new Date().valueOf()
-    }
-  }
-
   const initialTodoData = () => JSON.parse(window.localStorage.getItem("todoData")) || [createTodoItem('Make Awesome App')];
 
   const [todoData, setTodoData] = useState(initialTodoData);
@@ -28,6 +19,15 @@ const App = () => {
   const [isEditable, setIsEditable] = useState(false);
   const [editableId, setEditableId] = useState(null);
 
+
+  function createTodoItem(label) {
+    return {
+      label,
+      important: false,
+      done: false,
+      id: new Date().valueOf()
+    }
+  }
 
   const onEditableSave = value => {
     const idx = todoData.findIndex((el) => el.id === editableId);
@@ -125,24 +125,16 @@ const App = () => {
     }
   }
 
-  const onFilterChange = filterValue => {
-    setFilter(filterValue);
-  }
+  const onFilterChange = filterValue => setFilter(filterValue);
 
-  const visibleItems = filterCondition(
-    search(todoData, term), filter);
+  const visibleItems = filterCondition(search(todoData, term), filter);
 
-  const doneCount = todoData
-    .filter((el) => el.done).length;
+  const doneCount = todoData.filter((el) => el.done).length;
 
   const todoCount = todoData.length - doneCount;
 
-  let editableValue = '';
-
-  if (editableId && isEditable) {
-    const item = todoData.find((el) => el.id === editableId);
-    editableValue = item.label;
-  }
+  const item = todoData.find((el) => el.id === editableId);
+  const editableValue = editableId && isEditable ? item.label : '';
 
   useEffect(() => {
     window.localStorage.setItem('todoData', JSON.stringify(todoData));
@@ -162,7 +154,7 @@ const App = () => {
               filter={filter}
               onFilterChange={onFilterChange}/>
           </CardContent>
-          <CardContent className="">
+          <CardContent>
             <TodoList
               todos={visibleItems}
               onDeleted={deleteItem}
