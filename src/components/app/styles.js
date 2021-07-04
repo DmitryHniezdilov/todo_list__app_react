@@ -1,24 +1,24 @@
 import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles({
-  formControl: {
-    flex: 1,
-    paddingLeft: '1.25rem',
+  root: {
+    height: '100vh',
   },
-  input: {
-    marginRight: '1.25rem',
+  item: {
+    maxWidth: '470px',
   },
-  helpertext: {
-    color: '#f44336',
+  card: {
+    height: '100%',
+    width: '100%',
   },
-  itemAddFormWrap: {
-    padding: '6px 4px',
+  appTopWrap: {
     display: 'flex',
     flexFlow: 'column wrap',
     alignItems: 'center',
     '@media screen and (min-width: 600px)': {
       flexFlow: 'row wrap',
-      alignItems: 'flex-start'
+      alignItems: 'flex-end',
+      justifyContent: 'space-between'
     }
   }
 });

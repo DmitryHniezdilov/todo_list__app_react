@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import {FormHelperText, FormControl, Button, Paper, Input} from '@material-ui/core';
 import QueueIcon from '@material-ui/icons/Queue';
@@ -11,14 +11,12 @@ const ItemAddForm = ({onItemAdded, onEditableSave, isEditable, editableValue}) =
   const [isError, setError] = useState(false);
 
   const minInputLength = 8;
-  const conditionError = 0 < label.length && label.length < minInputLength;
 
   const nonSubmit = e => e.preventDefault();
 
   const onSubmit = e => {
     e.preventDefault();
     onItemAdded(label);
-
     setLabel('');
     setError(false);
   };
@@ -29,8 +27,9 @@ const ItemAddForm = ({onItemAdded, onEditableSave, isEditable, editableValue}) =
   }
 
   useEffect(() => {
+    const conditionError = 0 < label.length && label.length < minInputLength;
     conditionError ? setError(true) : setError(false);
-  }, [label, conditionError]);
+  }, [label]);
 
   useEffect(() => {
     if (isEditable) {
@@ -54,7 +53,7 @@ const ItemAddForm = ({onItemAdded, onEditableSave, isEditable, editableValue}) =
           placeholder='Enter new task'
           label={`Task '${label}'`}
           inputProps={{'aria-label': 'Enter new task'}}
-          onChange={e => setLabel(e.target.value)}
+          onChange={useCallback(e => setLabel(e.target.value), [])}
           value={label}
           helpertext="Incorrect entry."
         />

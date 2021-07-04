@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import Input from '@material-ui/core/Input';
 import {useStyles} from './styles';
@@ -7,11 +7,9 @@ const SearchPanel = ({onSearchChangeFunc}) => {
   const classes = useStyles();
   const [term, setTerm] = useState('');
 
-  const onSearchChange = (e) => {
-    const term = e.target.value;
-    setTerm(term);
-    onSearchChangeFunc(term);
-  };
+  useEffect(() => {
+    onSearchChangeFunc(term)
+  }, [term, onSearchChangeFunc]);
 
   return (
     <Input
@@ -20,7 +18,7 @@ const SearchPanel = ({onSearchChangeFunc}) => {
       placeholder="Type to search"
       inputProps={{'aria-label': 'Type to search'}}
       value={term}
-      onChange={onSearchChange}
+      onChange={useCallback(e => setTerm(e.target.value), [])}
     />
   );
 };

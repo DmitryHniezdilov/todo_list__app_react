@@ -16,11 +16,12 @@ const ItemStatusFilter = ({filter, onFilterChange}) => {
     const isActive = filter === name;
     const variantActive = isActive ? 'contained' : '';
     const colorActive = isActive ? 'primary' : '';
+    const clickBtn = () => onFilterChange(name);
 
     return (
       <Button
         key={name}
-        onClick={() => onFilterChange(name)}
+        onClick={clickBtn}
         variant={variantActive}
         color={colorActive}>
         {label}
@@ -37,7 +38,7 @@ const ItemStatusFilter = ({filter, onFilterChange}) => {
 
 ItemStatusFilter.propTypes = {
   filter: PropTypes.string,
-  onFilterChange: PropTypes.func,
+  onFilterChange: PropTypes.func
 };
 
 export default ItemStatusFilter;
