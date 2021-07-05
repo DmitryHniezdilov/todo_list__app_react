@@ -45,7 +45,7 @@ const ItemAddForm = ({onItemAdded, onEditableSave, isEditable, editableValue}) =
 
     return (
         <Paper component="form" className={classes.itemAddFormWrap}
-               onSubmit={isSubmitable ? changeSubmit : nonSubmit}>
+                onSubmit={isSubmitable ? changeSubmit : nonSubmit}>
             <FormControl className={classes.formControl}>
                 <Input
                     error={isError}

@@ -1,22 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Paper, Divider, IconButton, FormControl} from '@material-ui/core';
+import { Paper, Divider, IconButton, FormControl } from '@material-ui/core';
 import NotificationImportantIcon from '@material-ui/icons/NotificationImportant';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import TodoListItemLabel from '../todo-list-item-label'
-import {useStyles} from './styles';
+import { useStyles } from './styles';
 
 const TodoListItem = ({
-                          label,
-                          onDeleted,
-                          onToggleImportant,
-                          onToggleDone,
-                          important,
-                          done,
-                          editeItem,
-                          isEditable
-                      }) => {
+    label,
+    onDeleted,
+    onToggleImportant,
+    onToggleDone,
+    important,
+    done,
+    editeItem,
+    isEditable
+}) => {
+
     const classes = useStyles();
 
     let labelDone = '';
@@ -46,20 +47,20 @@ const TodoListItem = ({
             />
             <FormControl className={classes.formControl}>
                 <IconButton disabled={isEditable} type="button" color="secondary" className={classes.iconButton}
-                            aria-label="delete"
-                            onClick={onDeleted}>
-                    <DeleteIcon/>
+                    aria-label="delete"
+                    onClick={onDeleted}>
+                    <DeleteIcon />
                 </IconButton>
-                <Divider className={classes.divider} orientation="vertical"/>
+                <Divider className={classes.divider} orientation="vertical" />
                 <IconButton disabled={isEditable} type="button" color="primary" className={classes.iconButton}
-                            aria-label="important"
-                            onClick={onToggleImportant}>
-                    <NotificationImportantIcon/>
+                    aria-label="important"
+                    onClick={onToggleImportant}>
+                    <NotificationImportantIcon />
                 </IconButton>
-                <Divider className={classes.divider} orientation="vertical"/>
+                <Divider className={classes.divider} orientation="vertical" />
                 <IconButton disabled={isEditable} type="button" className={classes.iconButton} aria-label="edit"
-                            onClick={editeItem}>
-                    <EditIcon/>
+                    onClick={editeItem}>
+                    <EditIcon />
                 </IconButton>
             </FormControl>
         </Paper>

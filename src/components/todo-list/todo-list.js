@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TodoListItem from '../todo-list-item';
-import {useStyles} from './styles';
+import { useStyles } from './styles';
 
 const TodoList = ({
-                      todos,
-                      onDeleted,
-                      onToggleImportant,
-                      onToggleDone,
-                      editeItem,
-                      isEditable
-                  }) => {
+    todos,
+    onDeleted,
+    onToggleImportant,
+    onToggleDone,
+    editeItem,
+    isEditable
+}) => {
 
     const classes = useStyles();
 
     const elements = todos.map((item) => {
-        const {id, ...itemProps} = item;
+        const { id, ...itemProps } = item;
 
         return (
             <li key={id} className={classes.listGroupItem}>
