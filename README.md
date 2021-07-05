@@ -1,15 +1,17 @@
-﻿# [My Todo List](https://todo-list-hniezdilov.netlify.app/)  
+﻿# [My Todo List](https://todo-list-hniezdilov.netlify.app/)
 
-## App using [React](https://reactjs.org/), [React-materialize](https://material-ui.com) and saving data to localStorage.  
+## App using [React](https://reactjs.org/), [React-materialize](https://material-ui.com) and saving data to localStorage.
 
-### Installation  
+### Installation
 
-```  
-npm install  
-```  
+```
+npm install
+```
 
-### Run http server  
+### Run http server
 
-```  
-npm start  
-```  
+```
+npm start
+```
+
+---
