@@ -1,5 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useReducer} from 'react';
 import {Grid, Card, CardContent} from '@material-ui/core';
+import { Context } from '../../context';
+import initialState from '../../reducer/state';
+import toDoReducer from '../../reducer/reducers/todo';
 import AppTitle from '../app-title/';
 import AppStatus from '../app-status/';
 import SearchPanel from '../search-panel/';
@@ -10,6 +13,22 @@ import {useStyles} from './styles';
 
 const App = () => {
     const classes = useStyles();
+
+    // init useReduser //
+
+    function init(state) {
+        const initialTodoData = JSON.parse(window.localStorage.getItem("todoData")) || [createTodoItem('Make Awesome App')];
+        console.log('stateInit1', state);
+        console.log('initialTodoData', initialTodoData);
+        return {
+            ...state,
+            todoData: initialTodoData,
+        }
+    }
+
+    const [state, dispatch] = useReducer(toDoReducer, initialState, init);
+
+    // end init useReducer //
 
     const initialTodoData = () => JSON.parse(window.localStorage.getItem("todoData")) || [createTodoItem('Make Awesome App')];
 
@@ -141,36 +160,38 @@ const App = () => {
     }, [todoData]);
 
     return (
-        <Grid container justify="center" alignItems="center" className={classes.root}>
-            <Grid item xs={8} component="main" className={classes.item}>
-                <Card className={classes.card} variant="outlined">
-                    <CardContent className={classes.appTopWrap}>
-                        <AppTitle/>
-                        <AppStatus
-                            toDo={todoCount} done={doneCount}/>
-                        <SearchPanel
-                            onSearchChangeFunc={onSearchChange}/>
-                        <ItemStatusFilter
-                            filter={filter}
-                            onFilterChange={onFilterChange}/>
-                    </CardContent>
-                    <CardContent>
-                        <TodoList
-                            todos={visibleItems}
-                            onDeleted={deleteItem}
-                            onToggleImportant={onToggleImportant}
-                            onToggleDone={onToggleDone}
-                            editeItem={editeItem}
-                            isEditable={isEditable}/>
-                        <ItemAddForm
-                            onItemAdded={addItem}
-                            onEditableSave={onEditableSave}
-                            isEditable={isEditable}
-                            editableValue={editableValue}/>
-                    </CardContent>
-                </Card>
-            </Grid>
-        </Grid>
+        <Context.Provider value={[dispatch, state]}>
+                <Grid container justify="center" alignItems="center" className={classes.root}>
+                    <Grid item xs={8} component="main" className={classes.item}>
+                        <Card className={classes.card} variant="outlined">
+                            <CardContent className={classes.appTopWrap}>
+                                <AppTitle/>
+                                <AppStatus
+                                    toDo={todoCount} done={doneCount}/>
+                                <SearchPanel
+                                    onSearchChangeFunc={onSearchChange}/>
+                                <ItemStatusFilter
+                                    filter={filter}
+                                    onFilterChange={onFilterChange}/>
+                            </CardContent>
+                            <CardContent>
+                                <TodoList
+                                    todos={visibleItems}
+                                    onDeleted={deleteItem}
+                                    onToggleImportant={onToggleImportant}
+                                    onToggleDone={onToggleDone}
+                                    editeItem={editeItem}
+                                    isEditable={isEditable}/>
+                                <ItemAddForm
+                                    onItemAdded={addItem}
+                                    onEditableSave={onEditableSave}
+                                    isEditable={isEditable}
+                                    editableValue={editableValue}/>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                </Grid>
+        </Context.Provider>
     );
 };
 

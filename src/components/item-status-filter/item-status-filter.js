@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import {Button, ButtonGroup} from '@material-ui/core';
+import { Context } from "../../context";
+import * as types from '../../reducer/actionTypes';
 import {useStyles} from './styles';
 
 const buttonsList = [
@@ -12,11 +14,20 @@ const buttonsList = [
 const ItemStatusFilter = ({filter, onFilterChange}) => {
     const classes = useStyles();
 
+    // useContext
+
+    const [dispatch] = useContext(Context);
+
+    // end useContext
+
     const buttons = buttonsList.map(({name, label}) => {
         const isActive = filter === name;
         const variantActive = isActive ? 'contained' : '';
         const colorActive = isActive ? 'primary' : '';
-        const clickBtn = () => onFilterChange(name);
+        const clickBtn = () => {
+            onFilterChange(name);
+            dispatch({type: types.SET_FILTER_VALUE, filterValue: name})
+        };
 
         return (
             <Button

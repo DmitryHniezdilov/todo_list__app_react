@@ -1,0 +1,2 @@
+export const SET_FILTER_VALUE = 'SET_FILTER_VALUE';
+export const SET_EDITABLE = 'SET_EDITABLE';
