@@ -12,7 +12,7 @@ function TodoListItemLabel(props) {
             onClick={clickItemLabel}
             {...other}>
                 {label}
-    </span>
+        </span>
     );
 }
 

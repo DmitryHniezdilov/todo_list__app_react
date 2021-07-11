@@ -8,7 +8,7 @@ export const useStyles = makeStyles({
     input: {
         marginRight: '1.25rem',
     },
-    helpertext: {
+    helperText: {
         color: '#f44336',
     },
     itemAddFormWrap: {
